@@ -34,7 +34,7 @@ const ContactUs: React.FC = () => {
         'cf-msg'
       )! as HTMLInputElement;
       const response = await fetch(
-        'https://jeege-ceana.netlify.app/https://gmail.googleapis.com/upload/gmail/v1/users/dev.cjfritz@gmail.com/messages/send',
+        'https://jeege-ceana.netlify.app/contact-us/https://gmail.googleapis.com/upload/gmail/v1/users/dev.cjfritz@gmail.com/messages/send',
         {
           method: 'POST',
           headers: {
