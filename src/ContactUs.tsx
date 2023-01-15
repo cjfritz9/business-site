@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 const ContactUs: React.FC = () => {
   const [submitError, setSubmitError] = useState<string>("");
@@ -25,20 +25,20 @@ const ContactUs: React.FC = () => {
       const { value: user } = document.getElementById("cf-name")! as HTMLInputElement;
       const { value: email } = document.getElementById("cf-email")! as HTMLInputElement;
       const { value: message } = document.getElementById("cf-msg")! as HTMLInputElement;
-      const result = axios.post(
+      const response = await fetch(
         "https://gmail.googleapis.com/upload/gmail/v1/users/dev.cjfritz@gmail.com/messages/send",
-        {
+        {method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+      },
+        body: JSON.stringify({
           user,
           email,
           message
         })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-      return await result;
+      });
+      const result = response.json();
+      return result;
     }
   }
 
