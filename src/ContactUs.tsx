@@ -1,11 +1,9 @@
 import React, { SyntheticEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sendMail, setMailOptions } from '../utils/nodemailer';
 // import axios from "axios";
 
 const ContactUs: React.FC = () => {
   const [submitError, setSubmitError] = useState<string>('');
-  const navigate = useNavigate();
 
   const getIsFormValid = (): Boolean => {
     const formInputs = document.getElementsByClassName(
@@ -25,17 +23,17 @@ const ContactUs: React.FC = () => {
 
   const handleSubmit = async (e: SyntheticEvent): Promise<any> => {
     e.preventDefault();
-    if (getIsFormValid()) {
-      const { value: name } = document.getElementById(
-        'cf-name'
-      )! as HTMLInputElement;
-      const { value: email } = document.getElementById(
-        'cf-email'
-      )! as HTMLInputElement;
-      const { value: message } = document.getElementById(
-        'cf-msg'
-      )! as HTMLInputElement;
-    }
+    // if (getIsFormValid()) {
+    //   const { value: name } = document.getElementById(
+    //     'cf-name'
+    //   )! as HTMLInputElement;
+    //   const { value: email } = document.getElementById(
+    //     'cf-email'
+    //   )! as HTMLInputElement;
+    //   const { value: message } = document.getElementById(
+    //     'cf-msg'
+    //   )! as HTMLInputElement;
+    // }
   };
 
   const resetError = (): void => {
