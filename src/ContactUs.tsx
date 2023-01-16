@@ -1,74 +1,111 @@
-import React, { SyntheticEvent, useState } from 'react';
+import * as React from 'react';
 import './css/contact-us.css';
 
 const ContactUs: React.FC = () => {
-  const [submitError, setSubmitError] = useState<string>('');
+  const [formData, setformData] = React.useState<object>({});
 
-  // const getIsFormValid = (): Boolean => {
-  //   const formInputs = document.getElementsByClassName(
-  //     'cfi'
-  //   ) as HTMLCollectionOf<HTMLInputElement>;
+  const userInputData = {
+    name: "",
+    email: "",
+    message: ""
+  }
 
-  //   for (const input of formInputs) {
-  //     if (!input.value.length) {
-  //       setSubmitError('Please fill out the entire form!');
-  //       return false;
-  //     } else {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // };
+  const checkFields = (): void => {
+    const formInputs = document.getElementsByClassName(
+      'cfi'
+    ) as HTMLCollectionOf<HTMLInputElement>;
+    const submitButton = document.getElementById(
+      'submit-btn'
+    )! as HTMLButtonElement;
+    const buttonContainer = document.getElementById(
+      'cf-btn-container'
+    )! as HTMLButtonElement;
 
-  // const handleSubmit = async (e: SyntheticEvent): Promise<any> => {
-  //   e.preventDefault();
-  //   // if (getIsFormValid()) {
-  //   //   const { value: name } = document.getElementById(
-  //   //     'cf-name'
-  //   //   )! as HTMLInputElement;
-  //   //   const { value: email } = document.getElementById(
-  //   //     'cf-email'
-  //   //   )! as HTMLInputElement;
-  //   //   const { value: message } = document.getElementById(
-  //   //     'cf-msg'
-  //   //   )! as HTMLInputElement;
-  //   // }
-  // };
-
-  const resetError = (): void => {
-    setSubmitError('');
+    for (const input of formInputs) {
+      if (!input.value.length) {
+        submitButton.classList.add('cf-restricted');
+        buttonContainer.classList.add('pointer-events-none');
+      } else {
+        submitButton.classList.remove('cf-restricted');
+        buttonContainer.classList.remove('pointer-events-none');
+      }
+    }
   };
 
-  document.addEventListener('mousedown', resetError);
+  const handleSubmit = (e: React.SyntheticEvent): void => {
+    e.preventDefault();
+
+    const { value: name } = document.getElementById(
+      'name'
+    )! as HTMLInputElement;
+    const { value: email } = document.getElementById(
+      'email'
+    )! as HTMLInputElement;
+    const { value: message } = document.getElementById(
+      'message'
+    )! as HTMLInputElement;
+
+    userInputData.name = name;
+    userInputData.email = email;
+    userInputData.message = message;
+
+    window.location.href = `mailto:dev.cjfritz@gmail.com?subject=Inquiry%20From%20${userInputData.name}&body=${userInputData.message}%0AEmail:%20${userInputData.email}`;
+    
+  };
+
+  React.useEffect(() => {
+    checkFields();
+  }, []);
 
   return (
     <div id='contact-us-page'>
       <h1 id='cf-header'>Send Us A Message!</h1>
       <form
         id='contact-form'
-        action='mailto:dev.cjfritz@gmail.com'
         method='get'
         encType='text/plain'
+        onSubmit={(e) => handleSubmit(e)}
       >
         <div className='cf-top-container'>
-          <div className='cf-name'>
+          <div className='cf-name-container'>
             <div>Name:</div>
-            <input type='text' name='name' id='name' className='cf-name-email' required />
+            <input
+              onChange={() => checkFields()}
+              type='text'
+              name='name'
+              id='name'
+              className='cf-name-email cfi'
+              required
+            />
           </div>
-          <div className='cf-email'>
+          <div className='cf-email-container'>
             <div>Email:</div>
-            <input type='text' name='email' id='email' className='cf-name-email' required />
+            <input
+              onChange={() => checkFields()}
+              type='email'
+              name='email'
+              id='email'
+              className='cf-name-email cfi'
+              required
+            />
           </div>
         </div>
         <div>
           <div>Message:</div>
-          <input className='cf-message' name='comments' required />
+          <input
+            onChange={() => checkFields()}
+            id='message'
+            className='cf-message cfi'
+            name='comments'
+            required
+          />
         </div>
-        <div>
-          <input type='submit' name='submit' value='Send' />
+        <div id='cf-btn-container'>
+          <button id='submit-btn' className='cf-restricted' type='submit'>
+            Send
+          </button>
         </div>
       </form>
-      <div>{submitError}</div>
     </div>
   );
 };

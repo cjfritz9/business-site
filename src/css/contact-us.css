@@ -29,7 +29,7 @@
   width: 240px;
 }
 
-.cf-name {
+.cf-name-container {
   display: flex;
   flex-direction: column;
 }
@@ -38,4 +38,23 @@
   width: 500px;
   min-width: 250px;
   height: 100px;
+}
+
+#submit-btn:hover {
+  cursor: pointer;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.cf-restricted {
+  background-color: grey;
+  color: rgb(73, 73, 73);
+  border-color: rgb(73, 73, 73);
+  border-style: solid;
+}
+
+.cf-restricted:hover {
+  cursor: not-allowed;
 }
