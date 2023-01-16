@@ -1,25 +1,24 @@
 import React, { SyntheticEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 // import axios from "axios";
 
 const ContactUs: React.FC = () => {
   const [submitError, setSubmitError] = useState<string>('');
 
-  const getIsFormValid = (): Boolean => {
-    const formInputs = document.getElementsByClassName(
-      'cfi'
-    ) as HTMLCollectionOf<HTMLInputElement>;
+  // const getIsFormValid = (): Boolean => {
+  //   const formInputs = document.getElementsByClassName(
+  //     'cfi'
+  //   ) as HTMLCollectionOf<HTMLInputElement>;
 
-    for (const input of formInputs) {
-      if (!input.value.length) {
-        setSubmitError('Please fill out the entire form!');
-        return false;
-      } else {
-        return true;
-      }
-    }
-    return false;
-  };
+  //   for (const input of formInputs) {
+  //     if (!input.value.length) {
+  //       setSubmitError('Please fill out the entire form!');
+  //       return false;
+  //     } else {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // };
 
   const handleSubmit = async (e: SyntheticEvent): Promise<any> => {
     e.preventDefault();
