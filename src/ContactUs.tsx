@@ -1,14 +1,16 @@
 import React, { SyntheticEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { sendMail, setMailOptions } from '../utils/nodemailer';
 // import axios from "axios";
 
 const ContactUs: React.FC = () => {
   const [submitError, setSubmitError] = useState<string>('');
+  const navigate = useNavigate();
 
   const getIsFormValid = (): Boolean => {
     const formInputs = document.getElementsByClassName(
       'cfi'
     ) as HTMLCollectionOf<HTMLInputElement>;
-    console.log(formInputs);
 
     for (const input of formInputs) {
       if (!input.value.length) {
@@ -24,7 +26,7 @@ const ContactUs: React.FC = () => {
   const handleSubmit = async (e: SyntheticEvent): Promise<any> => {
     e.preventDefault();
     if (getIsFormValid()) {
-      const { value: user } = document.getElementById(
+      const { value: name } = document.getElementById(
         'cf-name'
       )! as HTMLInputElement;
       const { value: email } = document.getElementById(
@@ -33,24 +35,6 @@ const ContactUs: React.FC = () => {
       const { value: message } = document.getElementById(
         'cf-msg'
       )! as HTMLInputElement;
-      const response = await fetch(
-        'https://jeege-ceana.netlify.app/contact-us/https://gmail.googleapis.com/upload/gmail/v1/users/dev.cjfritz@gmail.com/messages/send',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          },
-          body: JSON.stringify({
-            user,
-            email,
-            message
-          })
-        }
-      );
-      const result = response.json();
-      console.log(result);
-      return result;
     }
   };
 
@@ -74,6 +58,31 @@ const ContactUs: React.FC = () => {
           placeholder='Ask Us Anything!'
         ></input>
         <button className='cf-submit'>Send</button>
+      </form>
+      <form
+        action='mailto:dev.cjfritz@gmail.com'
+        method='get'
+        encType='text/plain'
+      >
+        <div>
+        <label htmlFor="name">Name:
+          <input type="text" name="name" id="name" />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="email">Email:
+          <input type="text" name="email" id="email" />
+        </label>
+      </div>
+      <div>
+        <label>Comments:</label>
+        <br />
+        <input name="comments"></input>
+      </div>
+      <div>
+        <input type="submit" name="submit" value="Send" />
+        <input type="reset" name="reset" value="Clear Form" />
+      </div>
       </form>
       <div>{submitError}</div>
     </div>
