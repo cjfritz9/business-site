@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useState } from 'react';
-// import axios from "axios";
+import './css/contact-us.css';
 
 const ContactUs: React.FC = () => {
   const [submitError, setSubmitError] = useState<string>('');
@@ -20,20 +20,20 @@ const ContactUs: React.FC = () => {
   //   return false;
   // };
 
-  const handleSubmit = async (e: SyntheticEvent): Promise<any> => {
-    e.preventDefault();
-    // if (getIsFormValid()) {
-    //   const { value: name } = document.getElementById(
-    //     'cf-name'
-    //   )! as HTMLInputElement;
-    //   const { value: email } = document.getElementById(
-    //     'cf-email'
-    //   )! as HTMLInputElement;
-    //   const { value: message } = document.getElementById(
-    //     'cf-msg'
-    //   )! as HTMLInputElement;
-    // }
-  };
+  // const handleSubmit = async (e: SyntheticEvent): Promise<any> => {
+  //   e.preventDefault();
+  //   // if (getIsFormValid()) {
+  //   //   const { value: name } = document.getElementById(
+  //   //     'cf-name'
+  //   //   )! as HTMLInputElement;
+  //   //   const { value: email } = document.getElementById(
+  //   //     'cf-email'
+  //   //   )! as HTMLInputElement;
+  //   //   const { value: message } = document.getElementById(
+  //   //     'cf-msg'
+  //   //   )! as HTMLInputElement;
+  //   // }
+  // };
 
   const resetError = (): void => {
     setSubmitError('');
@@ -42,44 +42,31 @@ const ContactUs: React.FC = () => {
   document.addEventListener('mousedown', resetError);
 
   return (
-    <div>
+    <div id='contact-us-page'>
+      <h1 id='cf-header'>Send Us A Message!</h1>
       <form
-        className='contact-form'
-        onSubmit={(e: SyntheticEvent) => handleSubmit(e)}
-      >
-        <input id='cf-name' className='cfi' placeholder='Your Name'></input>
-        <input id='cf-email' className='cfi' placeholder='Your Email'></input>
-        <input
-          id='cf-msg'
-          className='cfi'
-          placeholder='Ask Us Anything!'
-        ></input>
-        <button className='cf-submit'>Send</button>
-      </form>
-      <form
+        id='contact-form'
         action='mailto:dev.cjfritz@gmail.com'
         method='get'
         encType='text/plain'
       >
+        <div className='cf-top-container'>
+          <div className='cf-name'>
+            <div>Name:</div>
+            <input type='text' name='name' id='name' className='cf-name-email' required />
+          </div>
+          <div className='cf-email'>
+            <div>Email:</div>
+            <input type='text' name='email' id='email' className='cf-name-email' required />
+          </div>
+        </div>
         <div>
-        <label htmlFor="name">Name:
-          <input type="text" name="name" id="name" />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="email">Email:
-          <input type="text" name="email" id="email" />
-        </label>
-      </div>
-      <div>
-        <label>Comments:</label>
-        <br />
-        <input name="comments"></input>
-      </div>
-      <div>
-        <input type="submit" name="submit" value="Send" />
-        <input type="reset" name="reset" value="Clear Form" />
-      </div>
+          <div>Message:</div>
+          <input className='cf-message' name='comments' required />
+        </div>
+        <div>
+          <input type='submit' name='submit' value='Send' />
+        </div>
       </form>
       <div>{submitError}</div>
     </div>
