@@ -2,7 +2,6 @@ import * as React from 'react';
 import './css/contact-us.css';
 
 const ContactUs: React.FC = () => {
-  const [formData, setformData] = React.useState<object>({});
 
   const userInputData = {
     name: "",
