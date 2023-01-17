@@ -1,6 +1,6 @@
 import * as React from 'react';
-import './css/contact-us.css';
-import * as CF from './models/ContactForm';
+import '../css/contact-us.css';
+import * as CF from '../models/ContactForm';
 
 const ContactUs: React.FC = () => {
   const checkFields = (): void => {
@@ -43,10 +43,6 @@ const ContactUs: React.FC = () => {
     window.location.href = `mailto:dev.cjfritz@gmail.com?subject=Inquiry%20From%20${userInputData.name}&body=${userInputData.message}%0AEmail:%20${userInputData.email}`;
   };
 
-  React.useEffect(() => {
-    checkFields();
-  }, []);
-
   return (
     <div id='contact-us-page'>
       <h1 id='cf-header'>Send Us A Message!</h1>
@@ -60,7 +56,7 @@ const ContactUs: React.FC = () => {
           <div className='cf-name-container'>
             <div>Name:</div>
             <input
-              onChange={() => checkFields()}
+              onChange={checkFields.bind(this)}
               type='text'
               name='name'
               id='name'
@@ -71,7 +67,7 @@ const ContactUs: React.FC = () => {
           <div className='cf-email-container'>
             <div>Email:</div>
             <input
-              onChange={() => checkFields()}
+              onChange={checkFields.bind(this)}
               type='email'
               name='email'
               id='email'
@@ -83,7 +79,7 @@ const ContactUs: React.FC = () => {
         <div>
           <div>Message:</div>
           <input
-            onChange={() => checkFields()}
+            onChange={checkFields.bind(this)}
             id='message'
             className='cf-message cfi'
             name='comments'
@@ -96,6 +92,10 @@ const ContactUs: React.FC = () => {
           </button>
         </div>
       </form>
+      <div>
+        Not working? E-mail us directly at dev.cjfritz@gmail.com
+      </div>
+      <div>Alternatively to fix the issue, try <a href='/mail-help'>this</a></div>
     </div>
   );
 };
