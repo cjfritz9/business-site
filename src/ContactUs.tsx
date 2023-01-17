@@ -2,12 +2,11 @@ import * as React from 'react';
 import './css/contact-us.css';
 
 const ContactUs: React.FC = () => {
-
   const userInputData = {
-    name: "",
-    email: "",
-    message: ""
-  }
+    name: '',
+    email: '',
+    message: ''
+  };
 
   const checkFields = (): void => {
     const formInputs = document.getElementsByClassName(
@@ -49,7 +48,6 @@ const ContactUs: React.FC = () => {
     userInputData.message = message;
 
     window.location.href = `mailto:dev.cjfritz@gmail.com?subject=Inquiry%20From%20${userInputData.name}&body=${userInputData.message}%0AEmail:%20${userInputData.email}`;
-    
   };
 
   React.useEffect(() => {
