@@ -1,13 +1,8 @@
 import * as React from 'react';
 import './css/contact-us.css';
+import * as CF from './models/ContactForm';
 
 const ContactUs: React.FC = () => {
-  const userInputData = {
-    name: '',
-    email: '',
-    message: ''
-  };
-
   const checkFields = (): void => {
     const formInputs = document.getElementsByClassName(
       'cfi'
@@ -43,9 +38,7 @@ const ContactUs: React.FC = () => {
       'message'
     )! as HTMLInputElement;
 
-    userInputData.name = name;
-    userInputData.email = email;
-    userInputData.message = message;
+    const userInputData = new CF.InputData(name, email, message);
 
     window.location.href = `mailto:dev.cjfritz@gmail.com?subject=Inquiry%20From%20${userInputData.name}&body=${userInputData.message}%0AEmail:%20${userInputData.email}`;
   };
